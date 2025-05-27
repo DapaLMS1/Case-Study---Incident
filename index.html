@@ -65,15 +65,19 @@
       transform: rotateY(180deg);
       background-color: #7ABF49;
       color: white;
-      flex-direction: column;
-      text-align: left;
-      justify-content: flex-start;
       font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: left;
+      padding: 25px 30px;
+      box-sizing: border-box;
+      overflow-y: auto;
     }
 
     .flip-card-back ul {
       padding-left: 20px;
-      margin-top: 0;
+      margin: 0;
     }
 
     .flip-card-back ul li {
@@ -107,6 +111,7 @@
 
   <div class="flip-card" id="fallCard">
     <div class="flip-card-inner">
+      <!-- FRONT -->
       <div class="flip-card-front">
         <div>
           An elderly gentleman is coming into the treatment room. He goes to put his hand on the bench to steady himself but misses and falls, hitting his head on the bench.<br><br>
@@ -114,6 +119,7 @@
           <em>Consider your response before flipping to reveal the correct response.</em>
         </div>
       </div>
+      <!-- BACK -->
       <div class="flip-card-back">
         <ul>
           <li>Ensure the patient is safe—do not move them unless in danger.</li>
