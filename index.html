@@ -49,15 +49,20 @@
       height: 100%;
       border: 2px solid #532A8C;
       border-radius: 10px;
-      background-color: #F2F2F2;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 25px 30px;
+      padding: 20px 25px;
       box-sizing: border-box;
-      font-size: 1.05em;
-      line-height: 1.5;
+      font-size: 1em;
+      line-height: 1.4;
+      backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+      background-color: #F2F2F2;
       color: #532A8C;
+      flex-direction: column;
       text-align: center;
     }
 
@@ -65,14 +70,9 @@
       transform: rotateY(180deg);
       background-color: #7ABF49;
       color: white;
-      font-size: 1rem;
-      display: flex;
       flex-direction: column;
       justify-content: flex-start;
       text-align: left;
-      padding: 25px 30px;
-      box-sizing: border-box;
-      overflow-y: auto;
     }
 
     .flip-card-back ul {
@@ -81,7 +81,7 @@
     }
 
     .flip-card-back ul li {
-      margin-bottom: 12px;
+      margin-bottom: 8px; /* reduced spacing */
     }
 
     .card-controls {
@@ -146,3 +146,4 @@
 
 </body>
 </html>
+
