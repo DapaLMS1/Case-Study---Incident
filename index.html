@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Case Study: Fall Incident</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
+  <title>Case Studies: Dental Incident Reporting</title>
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
@@ -20,15 +21,39 @@
 
     .instructions {
       font-size: 1rem;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    /* Container to hold the cards */
+    .scenario-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Counter text (e.g. Case 1 of 4) */
+    .case-counter {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .flip-card {
       background-color: transparent;
-      width: 500px;
-      height: 300px;
+      width: 100%;
+      max-width: 500px;
+      height: 350px; /* Increased slightly to fit more text */
       perspective: 1000px;
       margin: auto;
+      display: none; /* Hidden by default, JS handles visibility */
+    }
+
+    /* Show the first card by default (handled by JS, but good for fallback) */
+    .flip-card.active {
+      display: block;
     }
 
     .flip-card-inner {
@@ -57,10 +82,11 @@
       font-size: 1em;
       line-height: 1.4;
       backface-visibility: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     .flip-card-front {
-      background-color: #F2F2F2;
+      background-color: #ffffff;
       color: #532A8C;
       flex-direction: column;
       text-align: center;
@@ -71,79 +97,210 @@
       background-color: #7ABF49;
       color: white;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center; /* Center vertically */
       text-align: left;
     }
 
     .flip-card-back ul {
       padding-left: 20px;
       margin: 0;
+      width: 100%;
     }
 
     .flip-card-back ul li {
-      margin-bottom: 8px; /* reduced spacing */
+      margin-bottom: 6px;
+      font-size: 0.95em;
     }
 
-    .card-controls {
-      margin-top: 15px;
+    .h-highlight {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      display: block;
     }
 
-    .flip-button {
-      margin: 0 5px;
+    /* Controls Area */
+    .controls-area {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .action-button {
       padding: 10px 20px;
       font-size: 1rem;
-      background-color: #96BF78;
-      color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s;
+      min-width: 100px;
     }
 
-    .flip-button:hover {
+    .flip-btn {
+      background-color: #532A8C; /* Purple for main action */
+      color: white;
+    }
+    .flip-btn:hover {
+      background-color: #3e1f6b;
+    }
+
+    .nav-btn {
+      background-color: #96BF78;
+      color: white;
+    }
+    .nav-btn:hover {
       background-color: #7ABF49;
     }
+    
+    .nav-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
   </style>
 </head>
 <body>
 
-  <div class="title">Case Study Activity</div>
-  <div class="instructions">Read the workplace incident below and click the button to flip the card and reveal the correct response.</div>
+  <div class="title">Incident Reporting Case Studies</div>
+  <div class="instructions">Read the workplace incident below. Click "Flip Card" to reveal the correct procedure, then use "Next Case" to continue.</div>
 
-  <div class="flip-card" id="fallCard">
-    <div class="flip-card-inner">
-      <!-- FRONT -->
-      <div class="flip-card-front">
-        <div>
-          An elderly gentleman is coming into the treatment room. He goes to put his hand on the bench to steady himself but misses and falls, hitting his head on the bench.<br><br>
-          <strong>What do you do?</strong><br>
-          <em>Consider your response before flipping to reveal the correct response.</em>
+  <div class="scenario-container">
+    <div class="case-counter" id="caseCounter">Case 1 of 4</div>
+
+    <!-- CASE 1: FALL (Unchanged) -->
+    <div class="flip-card active" id="card-0">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div>
+            <span class="h-highlight">Scenario: Slips, Trips & Falls</span>
+            An elderly gentleman is coming into the treatment room. He goes to put his hand on the bench to steady himself but misses and falls, hitting his head on the bench.<br><br>
+            <strong>What do you do?</strong>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <ul>
+            <li>Ensure the patient is safe—do not move them unless in danger.</li>
+            <li>Call for help and notify a senior staff member immediately.</li>
+            <li>Provide first aid within your scope.</li>
+            <li><strong>Call an ambulance (000)</strong> if head injury is suspected or patient loses consciousness.</li>
+            <li>Record the incident in the patient's notes and the injury register.</li>
+            <li>Complete a formal Incident Report Form.</li>
+            <li>Identify the hazard (slippery floor? clutter?) to prevent recurrence.</li>
+          </ul>
         </div>
       </div>
-      <!-- BACK -->
-      <div class="flip-card-back">
-        <ul>
-          <li>Ensure the patient is safe—do not move them unless in danger.</li>
-          <li>Call for help and notify a senior staff member.</li>
-          <li>Provide first aid within your scope.</li>
-          <li>Call an ambulance (000) if head injury is suspected.</li>
-          <li>Record the incident in the injury register.</li>
-          <li>Notify your supervisor and complete an incident report.</li>
-          <li>PCBU must notify WorkCover if serious.</li>
-          <li>Identify and address contributing hazards.</li>
-        </ul>
+    </div>
+
+    <!-- CASE 2: SHARPS INJURY (Updated: Instrument Prick) -->
+    <div class="flip-card" id="card-1">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div>
+            <span class="h-highlight">Scenario: Sharps Injury (Instrument)</span>
+            While reaching across the instrument tray during a procedure, your hand brushes against a contaminated scaler. The sharp tip penetrates your glove and breaks the skin.<br><br>
+            <strong>What do you do?</strong>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <ul>
+            <li><strong>Stop immediately</strong> and verify the injury.</li>
+            <li>Encourage the wound to bleed gently; wash with soap and warm running water. Do not scrub.</li>
+            <li>Cover with a waterproof dressing.</li>
+            <li>Notify your supervisor/dentist immediately.</li>
+            <li>Follow the practice's Sharps Protocol (requires medical assessment and blood tests for you and potentially the patient).</li>
+            <li>Complete an Incident Report detailing the specific instrument involved.</li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="card-controls">
-      <button class="flip-button" onclick="flipCard()">Flip</button>
+
+    <!-- CASE 3: SWALLOWED OBJECT (Updated: Replaced Chemical) -->
+    <div class="flip-card" id="card-2">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div>
+            <span class="h-highlight">Scenario: Swallowed Object</span>
+            During the removal of a temporary crown, the crown dislodges unexpectedly and drops into the patient's throat. The patient coughs and appears to swallow it.<br><br>
+            <strong>What do you do?</strong>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <ul>
+            <li>Sit the patient up and encourage coughing.</li>
+            <li>Notify the Dentist immediately.</li>
+            <li>If the object is lost/swallowed, the patient <strong>must be referred for an immediate X-ray</strong> to rule out aspiration into the lungs.</li>
+            <li>Inform the patient of the incident (Duty of Candour/Open Disclosure).</li>
+            <li>Document the event thoroughly in patient notes.</li>
+            <li>Complete an Incident Report.</li>
+          </ul>
+        </div>
+      </div>
     </div>
+
+    <!-- CONTROLS -->
+    <div class="controls-area">
+      <button class="action-button nav-btn" id="prevBtn" onclick="changeCard(-1)">Previous Case</button>
+      <button class="action-button flip-btn" onclick="flipCurrentCard()">Flip Card</button>
+      <button class="action-button nav-btn" id="nextBtn" onclick="changeCard(1)">Next Case</button>
+    </div>
+
   </div>
 
   <script>
-    function flipCard() {
-      document.getElementById("fallCard").classList.toggle("flipped");
+    let currentIndex = 0;
+    const cards = document.querySelectorAll('.flip-card');
+    const totalCards = cards.length;
+    const counterDisplay = document.getElementById('caseCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Initialize state
+    updateUI();
+
+    function flipCurrentCard() {
+      // Find the currently active card and toggle the flipped class
+      const activeCard = document.querySelector('.flip-card.active');
+      if (activeCard) {
+        activeCard.classList.toggle("flipped");
+      }
+    }
+
+    function changeCard(direction) {
+      // Update index
+      currentIndex += direction;
+
+      // Loop functionality (optional - currently stops at ends)
+      if (currentIndex < 0) currentIndex = 0;
+      if (currentIndex >= totalCards) currentIndex = totalCards - 1;
+
+      updateUI();
+    }
+
+    function updateUI() {
+      // Hide all cards, remove 'active' and 'flipped' classes
+      cards.forEach((card, index) => {
+        if (index === currentIndex) {
+          card.style.display = 'block';
+          // Small timeout to allow display:block to render before adding class (for transitions if needed)
+          setTimeout(() => card.classList.add('active'), 10);
+          card.classList.remove('flipped'); // Reset flip state when moving to new card
+        } else {
+          card.style.display = 'none';
+          card.classList.remove('active');
+          card.classList.remove('flipped');
+        }
+      });
+
+      // Update Counter
+      counterDisplay.innerText = `Case ${currentIndex + 1} of ${totalCards}`;
+
+      // Disable buttons at ends
+      prevBtn.disabled = (currentIndex === 0);
+      nextBtn.disabled = (currentIndex === totalCards - 1);
     }
   </script>
 
 </body>
 </html>
-
